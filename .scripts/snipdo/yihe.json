@@ -1,0 +1,12 @@
+{
+    "name": "Yihe Translation",
+    "identifier": "com.yihe.snipdoext.desktop",
+    "icon": "yihe.png",
+    "actions": [
+        {
+            "title": "Yihe Translation",
+            "icon": "yihe.png",
+            "powershellFile": "yihe.ps1"
+        }
+    ]
+}

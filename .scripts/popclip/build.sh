@@ -1,7 +1,7 @@
-rm Pot.popclipextz
-mkdir Pot.popclipext
-cp Config.plist Pot.popclipext
-cp Pot.png Pot.popclipext
-cp Pot.sh Pot.popclipext
-zip -r Pot.popclipextz Pot.popclipext
-rm -r Pot.popclipext
+rm Yihe.popclipextz
+mkdir Yihe.popclipext
+cp Config.plist Yihe.popclipext
+cp Yihe.png Yihe.popclipext
+cp Yihe.sh Yihe.popclipext
+zip -r Yihe.popclipextz Yihe.popclipext
+rm -r Yihe.popclipext

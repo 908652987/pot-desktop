@@ -1,8 +1,10 @@
 {
-    "name": "pot",
+    "name": "yihe",
     "private": true,
     "version": "3.0.7",
     "type": "module",
+    "description": "Yihe - cross-platform text translation and OCR",
+    "license": "GPL-3.0-only",
     "scripts": {
         "dev": "vite",
         "build": "vite build",

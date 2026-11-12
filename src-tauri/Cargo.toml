@@ -1,10 +1,10 @@
 [package]
-name = "pot"
+name = "yihe"
 version = "0.0.0"
-description = "Pot App"
-authors = ["pot-app"]
+description = "Yihe App"
+authors = ["Yihe contributors"]
 license = "GPL-3.0-only"
-repository = "https://github.com/pot-app/pot-desktop"
+repository = "https://github.com/908652987/pot-desktop"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

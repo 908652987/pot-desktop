@@ -26,10 +26,8 @@ export default function Translate(props) {
     const [translateServiceInstanceList, setTranslateServiceInstanceList] = useConfig('translate_service_list', [
         'deepl',
         'bing',
-        'lingva',
         'yandex',
         'google',
-        'ecdict',
     ]);
 
     const { t } = useTranslation();

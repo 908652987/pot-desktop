@@ -73,7 +73,7 @@ export function Config(props) {
                     <h3 className='my-auto'>{t('services.help')}</h3>
                     <Button
                         onPress={() => {
-                            open('https://pot-app.com/docs/api/recognize/baidu_img.html');
+                            open('https://github.com/908652987/pot-desktop/blob/master/docs/services.md');
                         }}
                     >
                         {t('services.help')}

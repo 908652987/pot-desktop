@@ -71,13 +71,11 @@ export default function Translate() {
     const [translateServiceInstanceList, setTranslateServiceInstanceList] = useConfig('translate_service_list', [
         'deepl',
         'bing',
-        'lingva',
         'yandex',
         'google',
-        'ecdict',
     ]);
     const [recognizeServiceInstanceList] = useConfig('recognize_service_list', ['system', 'tesseract']);
-    const [ttsServiceInstanceList] = useConfig('tts_service_list', ['lingva_tts']);
+    const [ttsServiceInstanceList] = useConfig('tts_service_list', []);
     const [collectionServiceInstanceList] = useConfig('collection_service_list', []);
     const [hideLanguage] = useConfig('hide_language', false);
     const [pined, setPined] = useState(false);

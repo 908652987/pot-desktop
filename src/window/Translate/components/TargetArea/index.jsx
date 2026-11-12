@@ -62,7 +62,7 @@ export default function TargetArea(props) {
 
     const [appFontSize] = useConfig('app_font_size', 16);
     const [collectionServiceList] = useConfig('collection_service_list', []);
-    const [ttsServiceList] = useConfig('tts_service_list', ['lingva_tts']);
+    const [ttsServiceList] = useConfig('tts_service_list', []);
     const [translateSecondLanguage] = useConfig('translate_second_language', 'en');
     const [historyDisable] = useConfig('history_disable', false);
     const [isLoading, setIsLoading] = useState(false);
@@ -328,7 +328,7 @@ export default function TargetArea(props) {
 
     // refresh tts config
     useEffect(() => {
-        if (ttsServiceList && getServiceSouceType(ttsServiceList[0]) === ServiceSourceType.PLUGIN) {
+        if (ttsServiceList?.length > 0 && getServiceSouceType(ttsServiceList[0]) === ServiceSourceType.PLUGIN) {
             readTextFile(`plugins/tts/${getServiceName(ttsServiceList[0])}/info.json`, {
                 dir: BaseDirectory.AppConfig,
             }).then((infoStr) => {
@@ -339,7 +339,8 @@ export default function TargetArea(props) {
 
     // handle tts speak
     const handleSpeak = async () => {
-        const instanceKey = ttsServiceList[0];
+        const instanceKey = ttsServiceList?.[0];
+        if (!instanceKey) return;
         if (getServiceSouceType(instanceKey) === ServiceSourceType.PLUGIN) {
             const pluginConfig = serviceInstanceConfigMap[instanceKey];
             if (!(targetLanguage in ttsPluginInfo.language)) {
@@ -633,21 +634,23 @@ export default function TargetArea(props) {
                     >
                         <ButtonGroup>
                             {/* speak button */}
-                            <Tooltip content={t('translate.speak')}>
-                                <Button
-                                    isIconOnly
-                                    variant='light'
-                                    size='sm'
-                                    isDisabled={typeof result !== 'string' || result === ''}
-                                    onPress={() => {
-                                        handleSpeak().catch((e) => {
-                                            toast.error(e.toString(), { style: toastStyle });
-                                        });
-                                    }}
-                                >
-                                    <HiOutlineVolumeUp className='text-[16px]' />
-                                </Button>
-                            </Tooltip>
+                            {ttsServiceList?.length > 0 && (
+                                <Tooltip content={t('translate.speak')}>
+                                    <Button
+                                        isIconOnly
+                                        variant='light'
+                                        size='sm'
+                                        isDisabled={typeof result !== 'string' || result === ''}
+                                        onPress={() => {
+                                            handleSpeak().catch((e) => {
+                                                toast.error(e.toString(), { style: toastStyle });
+                                            });
+                                        }}
+                                    >
+                                        <HiOutlineVolumeUp className='text-[16px]' />
+                                    </Button>
+                                </Tooltip>
+                            )}
                             {/* copy button */}
                             <Tooltip content={t('translate.copy')}>
                                 <Button

@@ -17,7 +17,7 @@ export function Config(props) {
         instanceKey,
         {
             [INSTANCE_NAME_CONFIG_KEY]: t('services.collection.eudic.title'),
-            name: 'pot',
+            name: 'yihe',
             token: '',
         },
         { sync: false }
@@ -70,7 +70,7 @@ export function Config(props) {
                         <h3 className='my-auto'>{t('services.help')}</h3>
                         <Button
                             onPress={() => {
-                                open('https://pot-app.com/docs/api/collection/eudic.html');
+                                open('https://github.com/908652987/pot-desktop/blob/master/docs/services.md');
                             }}
                         >
                             {t('services.help')}

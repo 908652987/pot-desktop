@@ -39,7 +39,7 @@ export default function SourceArea(props) {
     const [deleteNewline] = useConfig('translate_delete_newline', false);
     const [recognizeLanguage] = useConfig('recognize_language', 'auto');
     const [recognizeServiceList] = useConfig('recognize_service_list', ['system', 'tesseract']);
-    const [ttsServiceList] = useConfig('tts_service_list', ['lingva_tts']);
+    const [ttsServiceList] = useConfig('tts_service_list', []);
     const [hideWindow] = useConfig('translate_hide_window', false);
     const [hideSource] = useConfig('hide_source', false);
     const [ttsPluginInfo, setTtsPluginInfo] = useState();
@@ -178,7 +178,8 @@ export default function SourceArea(props) {
     };
 
     const handleSpeak = async () => {
-        const instanceKey = ttsServiceList[0];
+        const instanceKey = ttsServiceList?.[0];
+        if (!instanceKey) return;
         let detected = detectLanguage;
         if (detected === '') {
             detected = await detect(sourceText);
@@ -226,7 +227,7 @@ export default function SourceArea(props) {
     }, [hideWindow]);
 
     useEffect(() => {
-        if (ttsServiceList && getServiceSouceType(ttsServiceList[0]) === ServiceSourceType.PLUGIN) {
+        if (ttsServiceList?.length > 0 && getServiceSouceType(ttsServiceList[0]) === ServiceSourceType.PLUGIN) {
             readTextFile(`plugins/tts/${getServiceName(ttsServiceList[0])}/info.json`, {
                 dir: BaseDirectory.AppConfig,
             }).then((infoStr) => {
@@ -387,20 +388,22 @@ export default function SourceArea(props) {
                 <CardFooter className='bg-content1 rounded-none rounded-b-[10px] flex justify-between px-[12px] p-[5px]'>
                     <div className='flex justify-start'>
                         <ButtonGroup className='mr-[5px]'>
-                            <Tooltip content={t('translate.speak')}>
-                                <Button
-                                    isIconOnly
-                                    variant='light'
-                                    size='sm'
-                                    onPress={() => {
-                                        handleSpeak().catch((e) => {
-                                            toast.error(e.toString(), { style: toastStyle });
-                                        });
-                                    }}
-                                >
-                                    <HiOutlineVolumeUp className='text-[16px]' />
-                                </Button>
-                            </Tooltip>
+                            {ttsServiceList?.length > 0 && (
+                                <Tooltip content={t('translate.speak')}>
+                                    <Button
+                                        isIconOnly
+                                        variant='light'
+                                        size='sm'
+                                        onPress={() => {
+                                            handleSpeak().catch((e) => {
+                                                toast.error(e.toString(), { style: toastStyle });
+                                            });
+                                        }}
+                                    >
+                                        <HiOutlineVolumeUp className='text-[16px]' />
+                                    </Button>
+                                </Tooltip>
+                            )}
                             <Tooltip content={t('translate.copy')}>
                                 <Button
                                     isIconOnly
